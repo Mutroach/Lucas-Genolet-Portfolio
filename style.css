@@ -1,4 +1,4 @@
-/* --- RESET Y CONFIGURACIÓN GLOBAL --- */
+/* --- CONFIGURACIÓN BASE --- */
 body, html {
   margin: 0;
   padding: 0;
@@ -9,22 +9,10 @@ body, html {
   scroll-behavior: smooth;
 }
 
-h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 900;
-  font-size: 4rem;
-  letter-spacing: -3px;
-}
+h1 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 4rem; letter-spacing: -3px; }
+h2 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2.5rem; letter-spacing: -0.02em; margin-bottom: 20px; }
 
-h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 2.5rem;
-  letter-spacing: -0.02em;
-  margin-bottom: 20px;
-}
-
-/* --- NAVEGACIÓN --- */
+/* --- 1. NAVEGACIÓN (NAV-PRINCIPAL) --- */
 .nav-principal {
   position: fixed;
   top: 0;
@@ -40,10 +28,20 @@ h2 {
   box-sizing: border-box;
 }
 
+.nav-logo {
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
 .nav-links {
   display: flex;
   list-style: none;
   gap: 30px;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
@@ -52,9 +50,13 @@ h2 {
   font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: opacity 0.3s;
 }
 
-/* --- SECCION 1 (HERO) --- */
+.nav-links a:hover { opacity: 0.6; }
+
+/* --- 2. SECCION 1 (HERO) --- */
 .Seccion1 {
   display: flex;
   flex-direction: row-reverse;
@@ -76,20 +78,11 @@ h2 {
   position: relative;
 }
 
-.derecha {
-  align-items: flex-start;
-  padding-left: 10%;
-}
-
+.derecha { align-items: flex-start; padding-left: 10%; }
 .derecha h1 { font-size: 3.5rem; margin: 0; }
 .derecha h2 { font-size: 1.2rem; color: #888; letter-spacing: 5px; margin-top: 10px; }
 
-/* Contenedor de imágenes en Desktop */
-#contenedor-perfil {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
+#contenedor-perfil { position: relative; width: 100%; height: 100%; }
 
 #perfil1 {
   max-width: 450px;
@@ -109,233 +102,92 @@ h2 {
   position: absolute;
   z-index: 2;
   left: 80%;
-  top: 30%;
+  top: 35%;
   transform: translate(-50%, -50%);
-  animation: flotarDesktop 4s ease-in-out infinite; /* Flota siempre */
+  animation: flotarDesktop 4s ease-in-out infinite;
 }
 
-/* --- SECCION 2 (SERVICIOS) --- */
-#Seccion2 {
-  display: flex;
-  width: 100%;
-  height: 60vh;
-  overflow: hidden;
-}
-
-.item-servicio {
-  flex: 1;
-  position: relative;
-  transition: all 0.5s ease;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* --- 3. SECCION 2 (ITEMS EXPANDIBLES) --- */
+#Seccion2 { display: flex; width: 100%; height: 60vh; overflow: hidden; }
+.item-servicio { flex: 1; position: relative; transition: all 0.5s ease; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .item-servicio:hover { flex: 2; }
-
-.media-preview, .media-video {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  object-fit: cover;
-}
-
+.media-preview, .media-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
 .media-video { opacity: 0; transition: opacity 0.3s ease; }
 .item-servicio:hover .media-video { opacity: 1; }
+.item-servicio::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); z-index: 2; }
+.info-servicio { position: relative; z-index: 5; color: white; text-align: center; }
+.subtitulo { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.4s ease; }
+.item-servicio:hover .subtitulo { max-height: 50px; opacity: 1; }
 
-.item-servicio::after {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
-  z-index: 2;
-}
-
-.info-servicio {
-  position: relative;
-  z-index: 5;
-  color: white;
-  text-align: center;
-}
-
-.subtitulo {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: all 0.4s ease;
-}
-
-.item-servicio:hover .subtitulo {
-  max-height: 50px;
-  opacity: 1;
-}
-
-/* --- DETALLES DE SERVICIO --- */
-.detalle-servicio {
-  padding: 60px 10%;
-  background-color: #ffffff;
-}
-
+/* --- 4. DETALLES Y SLIDER CELULAR --- */
+.detalle-servicio { padding: 60px 10%; background-color: #ffffff; }
 .detalle-servicio.alt { background-color: #f4f4f4; }
 .detalle-servicio.alt .contenedor-detalle { flex-direction: row-reverse; }
-
-.contenedor-detalle {
-  display: flex;
-  gap: 50px;
-  align-items: center;
-}
-
+.contenedor-detalle { display: flex; gap: 50px; align-items: center; }
 .texto-col, .media-col { flex: 1; }
 .media-col video { width: 100%; border-radius: 15px; }
 
-/* --- CELULAR SLIDER --- */
-.celular-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 300px;
-  aspect-ratio: 9 / 19;
-  margin: 0 auto;
-}
-
-.frame-png {
-  position: absolute;
-  width: 100%; height: 100%;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.video-slider {
-  position: absolute;
-  top: 2%; left: 5%; right: 5%; bottom: 2%;
-  border-radius: 30px;
-  overflow: hidden;
-  background: #000;
-}
-
-.video-item {
-  position: absolute;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-
+.celular-wrapper { position: relative; width: 100%; max-width: 300px; aspect-ratio: 9 / 19; margin: 0 auto; }
+.frame-png { position: absolute; width: 100%; height: 100%; z-index: 10; pointer-events: none; }
+.video-slider { position: absolute; top: 2%; left: 5%; right: 5%; bottom: 2%; border-radius: 30px; overflow: hidden; background: #000; }
+.video-item { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.4s; }
 .video-item.active { opacity: 1; }
-
-.prev-btn, .next-btn {
-  position: absolute;
-  top: 50%;
-  z-index: 100;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  border: none;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-}
+.prev-btn, .next-btn { position: absolute; top: 50%; z-index: 100; background: rgba(0,0,0,0.6); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
 .prev-btn { left: -60px; }
 .next-btn { right: -60px; }
 
-/* --- GALERIA INFINITA --- */
+/* --- 5. GALERIA DE TRABAJOS (CUBOS) --- */
 .seccion-trabajos { background: #111; padding: 80px 0; overflow: hidden; }
 .titulo-galeria { text-align: center; color: white; margin-bottom: 40px; }
-
 .marquee-container { display: flex; flex-direction: column; gap: 20px; }
 .marquee-row { overflow: hidden; display: flex; }
 .marquee-track { display: flex; gap: 20px; width: max-content; }
-
-.trabajo-cubo {
-  width: 250px; height: 250px;
-  border-radius: 15px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.trabajo-cubo img { width: 100%; height: 100%; object-fit: cover; }
-
+.trabajo-cubo { width: 250px; height: 250px; border-radius: 15px; overflow: hidden; flex-shrink: 0; }
+.trabajo-cubo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.trabajo-cubo:hover img { transform: scale(1.1); }
 .track-left { animation: scrollLeft 40s linear infinite; }
 .track-right { animation: scrollRight 40s linear infinite; }
 
-/* --- SECCIÓN CONTACTO --- */
-.seccion-contacto {
-  background: #111;
-  color: white;
-  padding: 100px 10%;
-  text-align: center;
-}
+/* --- 6. SECCIÓN CONTACTO (FOOTER) --- */
+.seccion-contacto { background-color: #111; color: white; padding: 100px 10% 40px 10%; text-align: center; }
+.contacto-wrapper h2 { font-size: 3rem; margin-bottom: 20px; color: white; }
+.mail-contacto { font-size: 1.5rem; font-weight: 700; margin-bottom: 50px; color: #888; text-decoration: none; transition: color 0.3s; display: inline-block; }
+.mail-contacto:hover { color: white; }
+.redes-sociales { display: flex; justify-content: center; gap: 40px; margin-bottom: 80px; flex-wrap: wrap; }
+.red-link { color: white; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; position: relative; padding-bottom: 5px; }
+.red-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: white; transition: width 0.3s; }
+.red-link:hover::after { width: 100%; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; font-size: 0.8rem; color: #444; }
 
-.redes-sociales {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.red-link { color: white; text-decoration: none; font-weight: 700; }
-
-/* --- KEYFRAMES --- */
+/* --- 7. ANIMACIONES (KEYFRAMES) --- */
 @keyframes scrollLeft { 100% { transform: translateX(-50%); } }
-@keyframes scrollRight { 
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
-@keyframes flotarDesktop {
-  0%, 100% { transform: translate(-50%, -50%); }
-  50% { transform: translate(-50%, -60%); }
-}
-@keyframes flotarMobile {
-  0%, 100% { transform: translate(-50%, -50%); }
-  50% { transform: translate(-50%, -75%); }
-}
+@keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+@keyframes flotarDesktop { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -65%); } }
+@keyframes flotarMobile { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -85%); } }
 
-/* --- MEDIA QUERY MOBILE --- */
+/* --- 8. MEDIA QUERIES (MOBILE) --- */
 @media (max-width: 768px) {
   .nav-links { display: none; }
-
-  .Seccion1 {
-    flex-direction: column !important;
-    height: auto !important;
-    min-height: 90vh !important;
-    padding-top: 100px !important;
-  }
-
-  .derecha {
-    order: 1;
-    padding: 0 !important;
-    align-items: center;
-    text-align: center;
-    min-height: auto !important;
-  }
-
+  .Seccion1 { flex-direction: column !important; height: auto !important; min-height: 90vh !important; padding-top: 100px !important; }
+  .derecha { order: 1; padding: 0 !important; align-items: center; text-align: center; min-height: auto !important; }
   .derecha h1 { font-size: 2.8rem !important; }
-
-  .izquierda {
-    order: 2;
-    height: 400px !important;
-    margin-top: 20px;
-  }
-
-  #perfil1 {
-    width: 75% !important;
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-  }
-
+  .izquierda { order: 2; height: 400px !important; margin-top: 20px; }
+  #perfil1 { width: 75% !important; position: absolute !important; bottom: 0 !important; left: 50% !important; transform: translateX(-50%) !important; }
+  
+  /* DRON MOBILE: IZQUIERDA Y ANIMADO */
   #avata {
     width: 100px !important;
-    left: 20% !important; /* Dron a la izquierda */
-    top: 20% !important;
+    left: 20% !important; 
+    top: 25% !important;
     animation: flotarMobile 3s ease-in-out infinite !important;
   }
 
   #Seccion2 { flex-direction: column; height: auto; }
   .item-servicio { height: 180px; }
-  
   .contenedor-detalle { flex-direction: column !important; }
   .prev-btn { left: 10px; }
   .next-btn { right: 10px; }
-  
   .trabajo-cubo { width: 160px; height: 160px; }
+  .contacto-wrapper h2 { font-size: 2.2rem; }
+  .mail-contacto { font-size: 1.1rem; }
 }

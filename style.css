@@ -1,44 +1,14 @@
-/* Quitamos márgenes por defecto del navegador */
+/* --- RESET Y CONFIGURACIÓN GLOBAL --- */
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-}
-
-/* --- CONFIGURACIÓN GLOBAL --- */
-body {
-  font-family: 'Inter', sans-serif; /* Fuente base */
-  color: #1a1a1a;
-  -webkit-font-smoothing: antialiased; /* Suaviza la fuente en Mac/Chrome */
-}
-
-/* --- TÍTULOS DE SECCIÓN --- */
-h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;    /* Bien Bold */
-  font-size: 2.5rem;
-  letter-spacing: -0.02em; /* Un truco de Apple para que se vea más pro */
-  margin-bottom: 20px;
-  text-transform: none; /* Mantener mayúsculas y minúsculas naturales */
-}
-
-/* --- TÍTULOS DE LOS ITEMS (Sección 2) --- */
-.info-servicio h3 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px; /* Aquí sí expandimos un poco para el look de cine */
-}
-
-/* --- DESCRIPCIONES --- */
-p, .subtitulo, .texto-col p {
   font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #666; /* Un gris oscuro para que el título resalte más */
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
 }
 
-/* --- TU NOMBRE (H1) --- */
 h1 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
@@ -46,12 +16,49 @@ h1 {
   letter-spacing: -3px;
 }
 
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 2.5rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
 
-/* --- SECCION 1 --- */
+/* --- NAVEGACIÓN --- */
+.nav-principal {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  background: rgba(17, 17, 17, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* --- SECCION 1 (HERO) --- */
 .Seccion1 {
   display: flex;
   flex-direction: row-reverse;
-  min-height: 60vh; /* Cambiamos height por min-height y subimos a 80 */
+  min-height: 60vh;
   width: 100%;
   background-color: #111111;
   color: white;
@@ -70,119 +77,85 @@ h1 {
 }
 
 .derecha {
-  display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
   padding-left: 10%;
-  min-width: 300px; /* Ajusta según tu diseño */
-  min-height: 200px; /* Espacio reservado para texto */
+}
+
+.derecha h1 { font-size: 3.5rem; margin: 0; }
+.derecha h2 { font-size: 1.2rem; color: #888; letter-spacing: 5px; margin-top: 10px; }
+
+/* Contenedor de imágenes en Desktop */
+#contenedor-perfil {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 #perfil1 {
-  max-width: 350px;
-  width: 60%;
+  max-width: 450px;
+  width: 80%;
   height: auto;
   position: absolute;
   z-index: 1;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 0;
+  transform: translateX(-50%);
 }
 
 #avata {
   max-width: 180px;
-  width: 35%;
+  width: 30%;
   height: auto;
   position: absolute;
   z-index: 2;
-  left: 85%; /* En desktop a la derecha */
-  top: 35%;
+  left: 80%;
+  top: 30%;
   transform: translate(-50%, -50%);
-  transition: transform 0.5s ease-out;
+  animation: flotarDesktop 4s ease-in-out infinite; /* Flota siempre */
 }
 
-/* Ajuste de los textos */
-.derecha h1 {
-  font-size: 3.5rem;
-  margin: 0;
-  font-weight: 900;
-}
-
-.derecha h2 {
-  font-size: 1.2rem;
-  color: #888;
-  letter-spacing: 5px;
-  margin-top: 10px;
-}
-
+/* --- SECCION 2 (SERVICIOS) --- */
 #Seccion2 {
   display: flex;
   width: 100%;
-  height: 60vh; /* Altura del rectángulo */
+  height: 60vh;
   overflow: hidden;
 }
 
 .item-servicio {
-  flex: 1; /* Todos iguales al inicio */
+  flex: 1;
   position: relative;
-  transition: all 0.5s ease; /* Movimiento suave al expandir */
+  transition: all 0.5s ease;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* --- CUANDO PASAS EL MOUSE --- */
-.item-servicio:hover {
-  flex: 2; /* El item crece */
-}
+.item-servicio:hover { flex: 2; }
 
-/* --- MANEJO DE FOTO Y VIDEO --- */
 .media-preview, .media-video {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Para que llenen el espacio sin deformarse */
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
 }
 
-.media-video {
-  opacity: 0; /* Oculto por defecto */
-  transition: opacity 0.3s ease;
-}
+.media-video { opacity: 0; transition: opacity 0.3s ease; }
+.item-servicio:hover .media-video { opacity: 1; }
 
-.item-servicio:hover .media-video {
-  opacity: 1; /* Aparece el video */
-}
-
-/* --- TEXTOS --- */
 .item-servicio::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Gradiente que va de transparente arriba a negro abajo */
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 40%, transparent 100%);
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
   z-index: 2;
-  transition: opacity 0.3s ease;
 }
-
-.item-servicio:hover::after {
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
-}
-
 
 .info-servicio {
   position: relative;
   z-index: 5;
-  color: #ffffff; /* Texto siempre blanco */
-  padding: 20px;
+  color: white;
   text-align: center;
-  text-shadow: 0px 4px 15px rgba(0,0,0,0.5);
 }
 
 .subtitulo {
@@ -190,499 +163,179 @@ h1 {
   opacity: 0;
   overflow: hidden;
   transition: all 0.4s ease;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.9); /* Blanco un pelín transparente */
-  font-weight: 400;
 }
 
 .item-servicio:hover .subtitulo {
   max-height: 50px;
   opacity: 1;
-  margin-top: 10px;
 }
 
-.item-servicio {
-  cursor: pointer;
-}
-
-/* Esto hace que el navegador entienda que "el inicio" de la sección 
-   está un poco más arriba, ideal si tienes un nav fijo */
+/* --- DETALLES DE SERVICIO --- */
 .detalle-servicio {
-  padding: 0 10%;       /* Cero espacio arriba/abajo, mantenemos 10% a los lados */
-  min-height: auto;
-  display: flex;
-  align-items: center;
+  padding: 60px 10%;
   background-color: #ffffff;
-  /* Quitamos el border-bottom si quieres que la transición de colores sea limpia */
-  border-bottom: none; 
 }
 
-/* Para que el scroll sea suave incluso si el usuario usa links normales */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Fondo gris claro para las secciones pares para diferenciarlas */
-.detalle-servicio.alt {
-  background-color: #f4f4f4;
-}
-
-/* Alternar orden de columnas */
-.detalle-servicio.alt .contenedor-detalle {
-  flex-direction: row-reverse;
-}
+.detalle-servicio.alt { background-color: #f4f4f4; }
+.detalle-servicio.alt .contenedor-detalle { flex-direction: row-reverse; }
 
 .contenedor-detalle {
   display: flex;
-  gap: 30px;
+  gap: 50px;
   align-items: center;
-  width: 100%;
-  /* El margen del contenedor definirá el espacio mínimo real */
-  margin: 0; 
 }
 
-.texto-col, .media-col {
-  flex: 1;
-}
+.texto-col, .media-col { flex: 1; }
+.media-col video { width: 100%; border-radius: 15px; }
 
-.media-col {
-  padding: 40px 0; /* Un pequeño respiro interno para el celular */
-}
-
-.media-col video {
-  width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
-
-.texto-col h2 {
-  font-size: 2rem;      /* Achicamos un poco el título para que no empuje tanto */
-  margin-bottom: 15px;
-  color: #1a1a1a;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.texto-col p {
-  line-height: 1.5;     /* Ajustamos el interlineado para que el bloque de texto sea más bajo */
-  margin-bottom: 10px;
-}
-
+/* --- CELULAR SLIDER --- */
 .celular-wrapper {
   position: relative;
-  width: 100%;           /* Ocupa el ancho de su columna */
-  max-width: 300px;      /* Pero no más de 300px (tamaño real de un celu) */
-  aspect-ratio: 9 / 19;  /* Mantiene la proporción de un smartphone moderno */
-  margin: 0 auto;        /* Lo centra en la columna */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 9 / 19;
+  margin: 0 auto;
 }
 
 .frame-png {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Asegura que el PNG no se deforme ni se aplaste */
+  width: 100%; height: 100%;
   z-index: 10;
   pointer-events: none;
 }
 
 .video-slider {
   position: absolute;
-  /* Ajusta estos % según los bordes de tu PNG específico */
-  top: 2%; 
-  left: 5%;
-  right: 5%;
-  bottom: 2%;
-  cursor: pointer;
+  top: 2%; left: 5%; right: 5%; bottom: 2%;
+  border-radius: 30px;
   overflow: hidden;
-  border-radius: 30px; /* Bordes redondeados para coincidir con el celu */
-  z-index: 5;
-  background-color: #000;
+  background: #000;
 }
 
 .video-item {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* El video llena la pantalla del celu sin estirarse */
+  width: 100%; height: 100%;
+  object-fit: cover;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s;
 }
 
-.video-item.active {
-  opacity: 1;
-}
+.video-item.active { opacity: 1; }
 
-/* Botones de navegación */
 .prev-btn, .next-btn {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  z-index: 30; /* Por encima de TODO */
-  pointer-events: auto;
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255,255,255,0.3);
+  z-index: 100;
+  background: rgba(0,0,0,0.6);
   color: white;
-  width: 45px;
-  height: 45px;
-  cursor: pointer;
+  border: none;
+  width: 40px; height: 40px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  transition: background 0.3s;
+  cursor: pointer;
 }
-
-.prev-btn { left: -60px; } /* Los sacamos hacia afuera del celular */
+.prev-btn { left: -60px; }
 .next-btn { right: -60px; }
 
+/* --- GALERIA INFINITA --- */
+.seccion-trabajos { background: #111; padding: 80px 0; overflow: hidden; }
+.titulo-galeria { text-align: center; color: white; margin-bottom: 40px; }
 
-.celular-wrapper {
-    overflow: visible; /* Permite que las flechas que están afuera se vean */
-}
+.marquee-container { display: flex; flex-direction: column; gap: 20px; }
+.marquee-row { overflow: hidden; display: flex; }
+.marquee-track { display: flex; gap: 20px; width: max-content; }
 
-.prev-btn, .next-btn {
-    z-index: 100 !important; /* Fuerza a que estén arriba de todo */
-}
-
-
-/* Overlay de Play */
-.play-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.2); /* Sutil oscurecimiento al pausar */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 15;
-  transition: opacity 0.3s ease;
-  pointer-events: none; /* Para que el click pase al video-slider */
-}
-
-.play-icon {
-  font-size: 50px;
-  color: white;
-  opacity: 0.8;
-  filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
-}
-
-/* Botón de Mute */
-.mute-btn {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 20;
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
-  color: white;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Clases de estado (las controlaremos con JS) */
-.play-overlay.hidden {
-  opacity: 0;
-}
-
-
-
-
-/* Efecto de flash blanco */
-.flash-white {
-  animation: flashAnim 0.3s ease-in-out;
-}
-
-@keyframes flashAnim {
-  0% { filter: brightness(1) contrast(1); }
-  50% { filter: brightness(5) contrast(0.5); background-color: white; }
-  100% { filter: brightness(1) contrast(1); }
-}
-
-/* Contenedor para el efecto Typewriter */
-#profesion {
-  display: block;
-  min-height: 1.5em;
-  line-height: 1.5em;
-  margin-top: 10px;
-  position: relative; /* Cambiado a relative para que no flote loco */
-  width: auto;
-  text-align: center;
-  white-space: nowrap;
-  border-right: 2px solid rgba(255,255,255,0.75); /* Cursor del typewriter */
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: white; }
-}
-
-
-
-#contenedor-perfil {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.grupo-foto {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  opacity: 0; /* Ocultas por defecto */
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.grupo-foto.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Reutilizamos tus medidas para las imágenes internas */
-.perfil-img {
-  max-width: 550px; width: 80%; height: auto;
-  position: absolute; z-index: 1;
-  left: 0%;           /* Cuanto más alto el %, más a la derecha se va */
-  bottom: 0%;
-
-}
-
-.dron-img {
-  max-width: 180px; width: 35%; height: auto;
-  position: absolute; z-index: 2;
-  left: 05%; top: 35%;
-  transform: translate(-50%, -50%);
-}
-
-
-
-
-@media (max-width: 768px) {
-
-  /* 1. INVERTIR ORDEN: Nombre arriba, Foto abajo */
-  .Seccion1 {
-    display: flex !important;
-    flex-direction: column !important; /* Texto (derecha) primero, Foto (izquierda) después */
-    height: auto !important; /* Que la altura la defina el contenido */
-    min-height: 90vh !important; /* Ocupa casi toda la pantalla */
-    padding-top: 80px !important; /* Espacio para el nav */
-    padding-bottom: 40px;
-    overflow: visible !important; /* Para que el dron pueda sobresalir si es necesario */
-  }
-
-  /* Ajuste de las columnas */
-  .izquierda, .derecha {
-    flex: none !important;
-    width: 100% !important;
-    height: auto !important;
-    position: relative !important;
-  }
-
-  /* Contenedor del Texto (Ahora arriba) */
-  .derecha {
-    order: 1; /* Fuerza a que vaya primero */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    padding: 20px 0 !important;
-    min-height: 150px !important;
-  }
-
-  .derecha h1 { 
-    font-size: 2.8rem !important; /* Nombre más grande en mobile */
-    letter-spacing: -2px !important;
-  }
-
-  #profesion {
-    font-size: 1.1rem !important;
-    letter-spacing: 3px !important;
-    margin: 10px auto 0 auto !important;
-    border-right: 2px solid rgba(255,255,255,0.75) !important; /* Mantenemos cursor */
-  }
-
-  /* Contenedor de la Foto (Ahora abajo) */
-  .izquierda {
-    order: 2; /* Fuerza a que vaya segundo */
-    margin-top: 20px;
-    height: 350px !important; /* Espacio fijo para la foto y el dron */
-  }
-
-  #contenedor-perfil {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end; /* La foto de perfil nace del suelo */
-  }
-
-  /* La foto de perfil */
-  .perfil-img {
-    width: 70% !important; /* Un poco más grande */
-    max-width: 280px !important;
-    position: relative !important; /* Cambiamos a relative para que fluya */
-    left: 0 !important;
-    top: 0 !important;
-    transform: none !important;
-    margin: 0 auto !important;
-    display: block;
-    z-index: 1;
-  }
-
-  /* 2. CORREGIR EL DRON: Ubicación y Animación */
-  .dron-img {
-    width: 90px !important; /* Tamaño móvil */
-    height: auto !important;
-    position: absolute !important;
-    z-index: 10 !important; /* Por encima de la foto */
-    
-    /* POSICIÓN: A la izquierda y arriba */
-    left: 15% !important;  /* Ajusta este % para moverlo más a la der o izq */
-    top: 10% !important;   /* Ajusta este % para subirlo o bajarlo */
-    
-    transform: translate(-50%, -50%) !important; /* Mantener eje centrado */
-    
-    /* ACTIVAR ANIMACIÓN AUTOMÁTICA */
-    animation: flotarMobile 3s ease-in-out infinite !important;
-    
-    /* Desactivar el transition del hover de desktop */
-    transition: none !important; 
-  }
-
-
-  /* 3. REPARACIÓN RESTO DE SECCIONES MOBILE (Mantenemos lo tuyo) */
-  .nav-links { display: none; }
-  #Seccion2 { flex-direction: column; height: auto; }
-  .item-servicio { width: 100%; height: 150px; }
-  
-  .contenedor-detalle, .detalle-servicio.alt .contenedor-detalle {
-    flex-direction: column;
-    padding: 40px 20px;
-  }
-  
-  .texto-col h2 { font-size: 1.8rem; text-align: center; }
-  .specs { padding-left: 20px; }
-
-  /* Flechas del slider dentro del celu */
-  .prev-btn { left: 10px !important; }
-  .next-btn { right: 10px !important; }
-
-  /* Ajuste de contacto */
-  .contacto-wrapper h2 { font-size: 2rem; }
-  .mail-contacto { font-size: 1.2rem; }
-  .redes-sociales { gap: 20px; }
-  .trabajo-cubo { width: 150px; height: 150px; } /* Cubos más chicos en mobile */
-}
-
-/* LA ANIMACIÓN (Siempre fuera del media query) */
-@keyframes flotarMobile {
-  0%   { transform: translate(-50%, -50%); }
-  50%  { transform: translate(-50%, -80%); } /* Sube */
-  100% { transform: translate(-50%, -50%); }
-}
-
-
-
-
-
-
-
-
-
-.seccion-trabajos {
-  background-color: #111;
-  padding: 80px 0;
-  overflow: hidden; /* Importante para que no salga scroll horizontal */
-}
-
-.titulo-galeria {
-  text-align: center;
-  color: white;
-  margin-bottom: 50px;
-}
-
-.marquee-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Espacio entre las dos filas */
-}
-
-.marquee-row {
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-}
-
-.marquee-track {
-  display: flex;
-  gap: 20px;
-  width: max-content; /* Permite que el div sea tan largo como las fotos */
-}
-
-/* Cubos individuales */
 .trabajo-cubo {
-  width: 250px;
-  height: 250px;
-  background-color: #222;
+  width: 250px; height: 250px;
   border-radius: 15px;
-  flex-shrink: 0;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
-.trabajo-cubo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-  /* filter: grayscale(40%); */
+.trabajo-cubo img { width: 100%; height: 100%; object-fit: cover; }
+
+.track-left { animation: scrollLeft 40s linear infinite; }
+.track-right { animation: scrollRight 40s linear infinite; }
+
+/* --- SECCIÓN CONTACTO --- */
+.seccion-contacto {
+  background: #111;
+  color: white;
+  padding: 100px 10%;
+  text-align: center;
 }
 
-.trabajo-cubo:hover img {
-  transform: scale(1.1);
-  filter: grayscale(0%);
+.redes-sociales {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
 }
 
-/* ANIMACIONES */
-.track-left {
-  animation: scrollLeft 50s linear infinite;
-}
+.red-link { color: white; text-decoration: none; font-weight: 700; }
 
-.track-right {
-  animation: scrollRight 50s linear infinite;
-}
-
-@keyframes scrollLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* Se mueve hacia la izquierda */
-}
-
-@keyframes scrollRight {
+/* --- KEYFRAMES --- */
+@keyframes scrollLeft { 100% { transform: translateX(-50%); } }
+@keyframes scrollRight { 
   0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); } /* Se mueve hacia la derecha */
+  100% { transform: translateX(0); }
+}
+@keyframes flotarDesktop {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50% { transform: translate(-50%, -60%); }
+}
+@keyframes flotarMobile {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50% { transform: translate(-50%, -75%); }
 }
 
-/* Pausar al pasar el mouse (opcional, queda muy pro) */
-.marquee-row:hover .marquee-track {
-  animation-play-state: paused;
+/* --- MEDIA QUERY MOBILE --- */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+
+  .Seccion1 {
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 90vh !important;
+    padding-top: 100px !important;
+  }
+
+  .derecha {
+    order: 1;
+    padding: 0 !important;
+    align-items: center;
+    text-align: center;
+    min-height: auto !important;
+  }
+
+  .derecha h1 { font-size: 2.8rem !important; }
+
+  .izquierda {
+    order: 2;
+    height: 400px !important;
+    margin-top: 20px;
+  }
+
+  #perfil1 {
+    width: 75% !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  #avata {
+    width: 100px !important;
+    left: 20% !important; /* Dron a la izquierda */
+    top: 20% !important;
+    animation: flotarMobile 3s ease-in-out infinite !important;
+  }
+
+  #Seccion2 { flex-direction: column; height: auto; }
+  .item-servicio { height: 180px; }
+  
+  .contenedor-detalle { flex-direction: column !important; }
+  .prev-btn { left: 10px; }
+  .next-btn { right: 10px; }
+  
+  .trabajo-cubo { width: 160px; height: 160px; }
 }
-
-

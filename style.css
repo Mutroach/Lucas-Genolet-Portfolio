@@ -745,11 +745,11 @@ html {
 
 /* ANIMACIONES */
 .track-left {
-  animation: scrollLeft 40s linear infinite;
+  animation: scrollLeft 50s linear infinite;
 }
 
 .track-right {
-  animation: scrollRight 40s linear infinite;
+  animation: scrollRight 50s linear infinite;
 }
 
 @keyframes scrollLeft {

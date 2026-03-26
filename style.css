@@ -476,213 +476,131 @@ html {
 
 
 
-
-
-
-
 @media (max-width: 768px) {
 
-  .dron-img {
-    width: 100px;
-    left: 75% !important;
-    top: 50% !important;
-  }
-
-
+  /* 1. INVERTIR ORDEN: Nombre arriba, Foto abajo */
   .Seccion1 {
     display: flex !important;
-    flex-direction: column !important;
-    height: 80vh !important; /* Altura fija para el Hero */
-    overflow: hidden;
+    flex-direction: column !important; /* Texto (derecha) primero, Foto (izquierda) después */
+    height: auto !important; /* Que la altura la defina el contenido */
+    min-height: 90vh !important; /* Ocupa casi toda la pantalla */
+    padding-top: 80px !important; /* Espacio para el nav */
+    padding-bottom: 40px;
+    overflow: visible !important; /* Para que el dron pueda sobresalir si es necesario */
   }
 
-.izquierda, .derecha {
-    height: 50% !important;
+  /* Ajuste de las columnas */
+  .izquierda, .derecha {
     flex: none !important;
     width: 100% !important;
-  }
-  
-  .derecha h1, .derecha h2 {
-    margin-left: 0;
-    margin-right: 0;
-    width: 100%;
+    height: auto !important;
+    position: relative !important;
   }
 
+  /* Contenedor del Texto (Ahora arriba) */
   .derecha {
+    order: 1; /* Fuerza a que vaya primero */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
-    padding: 0 !important;
+    padding: 20px 0 !important;
+    min-height: 150px !important;
+  }
+
+  .derecha h1 { 
+    font-size: 2.8rem !important; /* Nombre más grande en mobile */
+    letter-spacing: -2px !important;
   }
 
   #profesion {
-    font-size: 1.1rem;
-    letter-spacing: 3px;
-    margin: 10px auto 0 auto;
+    font-size: 1.1rem !important;
+    letter-spacing: 3px !important;
+    margin: 10px auto 0 auto !important;
+    border-right: 2px solid rgba(255,255,255,0.75) !important; /* Mantenemos cursor */
   }
 
-
-  #perfil1 {
-    width: 200px;
-    /* En mobile lo centramos */
-    left: 50%;
-    top: 50%;
+  /* Contenedor de la Foto (Ahora abajo) */
+  .izquierda {
+    order: 2; /* Fuerza a que vaya segundo */
+    margin-top: 20px;
+    height: 350px !important; /* Espacio fijo para la foto y el dron */
   }
 
-  #avata {
-    width: 100px;
-    left: 75% !important; /* Centrado sobre la foto en mobile */
-    top: 50% !important;
-    /* Aquí activamos la animación de flotado */
+  #contenedor-perfil {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* La foto de perfil nace del suelo */
+  }
+
+  /* La foto de perfil */
+  .perfil-img {
+    width: 70% !important; /* Un poco más grande */
+    max-width: 280px !important;
+    position: relative !important; /* Cambiamos a relative para que fluya */
+    left: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+    margin: 0 auto !important;
+    display: block;
+    z-index: 1;
+  }
+
+  /* 2. CORREGIR EL DRON: Ubicación y Animación */
+  .dron-img {
+    width: 90px !important; /* Tamaño móvil */
+    height: auto !important;
+    position: absolute !important;
+    z-index: 10 !important; /* Por encima de la foto */
+    
+    /* POSICIÓN: A la izquierda y arriba */
+    left: 15% !important;  /* Ajusta este % para moverlo más a la der o izq */
+    top: 10% !important;   /* Ajusta este % para subirlo o bajarlo */
+    
+    transform: translate(-50%, -50%) !important; /* Mantener eje centrado */
+    
+    /* ACTIVAR ANIMACIÓN AUTOMÁTICA */
     animation: flotarMobile 3s ease-in-out infinite !important;
+    
+    /* Desactivar el transition del hover de desktop */
+    transition: none !important; 
   }
 
-  h1 { font-size: 2.5rem; }
 
-  /* REPARACIÓN SECCION 2 Y DETALLES */
+  /* 3. REPARACIÓN RESTO DE SECCIONES MOBILE (Mantenemos lo tuyo) */
+  .nav-links { display: none; }
   #Seccion2 { flex-direction: column; height: auto; }
   .item-servicio { width: 100%; height: 150px; }
+  
   .contenedor-detalle, .detalle-servicio.alt .contenedor-detalle {
     flex-direction: column;
     padding: 40px 20px;
   }
-  .prev-btn { left: 10px; }
-  .next-btn { right: 10px; }
-} /* AQUÍ CIERRA EL MEDIA QUERY */
+  
+  .texto-col h2 { font-size: 1.8rem; text-align: center; }
+  .specs { padding-left: 20px; }
 
-/* LA ANIMACIÓN DEBE IR FUERA DEL MEDIA QUERY O BIEN IDENTADA */
+  /* Flechas del slider dentro del celu */
+  .prev-btn { left: 10px !important; }
+  .next-btn { right: 10px !important; }
+
+  /* Ajuste de contacto */
+  .contacto-wrapper h2 { font-size: 2rem; }
+  .mail-contacto { font-size: 1.2rem; }
+  .redes-sociales { gap: 20px; }
+  .trabajo-cubo { width: 150px; height: 150px; } /* Cubos más chicos en mobile */
+}
+
+/* LA ANIMACIÓN (Siempre fuera del media query) */
 @keyframes flotarMobile {
   0%   { transform: translate(-50%, -50%); }
-  50%  { transform: translate(-50%, -70%); } /* Sube un poco */
+  50%  { transform: translate(-50%, -80%); } /* Sube */
   100% { transform: translate(-50%, -50%); }
 }
 
 
-
-
-/* --- NAVEGACIÓN --- */
-.nav-principal {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 70px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 5%;
-  background: rgba(17, 17, 17, 0.9); /* Transparente oscuro */
-  backdrop-filter: blur(10px); /* Efecto vidrio */
-  z-index: 1000;
-  box-sizing: border-box;
-}
-
-.nav-logo {
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 900;
-  font-size: 1.5rem;
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 30px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: opacity 0.3s;
-}
-
-.nav-links a:hover {
-  opacity: 0.6;
-}
-
-/* --- SECCIÓN CONTACTO --- */
-.seccion-contacto {
-  background-color: #111;
-  color: white;
-  padding: 100px 10% 40px 10%;
-  text-align: center;
-}
-
-.contacto-wrapper h2 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  color: white;
-}
-
-.mail-contacto {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 50px;
-  color: #888;
-  transition: color 0.3s;
-  cursor: pointer;
-}
-
-.mail-contacto:hover {
-  color: white;
-}
-
-.redes-sociales {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-bottom: 80px;
-  flex-wrap: wrap;
-}
-
-.red-link {
-  color: white;
-  text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  position: relative;
-  padding-bottom: 5px;
-}
-
-.red-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: white;
-  transition: width 0.3s;
-}
-
-.red-link:hover::after {
-  width: 100%;
-}
-
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 40px;
-  font-size: 0.8rem;
-  color: #444;
-}
-
-/* Ajuste para que la Seccion1 no quede debajo del Nav */
-.Seccion1 {
-  margin-top: 0; 
-  padding-top: 70px; /* Compensa la altura del nav */
-}
-
-@media (max-width: 768px) {
-  .nav-links { display: none; } /* En mobile podrías usar un menú hamburguesa luego */
-  .contacto-wrapper h2 { font-size: 2rem; }
-  .redes-sociales { gap: 20px; }
-}
 
 
 

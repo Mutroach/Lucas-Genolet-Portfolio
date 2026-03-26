@@ -684,3 +684,87 @@ html {
   .redes-sociales { gap: 20px; }
 }
 
+
+
+
+
+
+
+.seccion-trabajos {
+  background-color: #111;
+  padding: 80px 0;
+  overflow: hidden; /* Importante para que no salga scroll horizontal */
+}
+
+.titulo-galeria {
+  text-align: center;
+  color: white;
+  margin-bottom: 50px;
+}
+
+.marquee-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre las dos filas */
+}
+
+.marquee-row {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 20px;
+  width: max-content; /* Permite que el div sea tan largo como las fotos */
+}
+
+/* Cubos individuales */
+.trabajo-cubo {
+  width: 250px;
+  height: 250px;
+  background-color: #222;
+  border-radius: 15px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.trabajo-cubo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  filter: grayscale(40%);
+}
+
+.trabajo-cubo:hover img {
+  transform: scale(1.1);
+  filter: grayscale(0%);
+}
+
+/* ANIMACIONES */
+.track-left {
+  animation: scrollLeft 40s linear infinite;
+}
+
+.track-right {
+  animation: scrollRight 40s linear infinite;
+}
+
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Se mueve hacia la izquierda */
+}
+
+@keyframes scrollRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); } /* Se mueve hacia la derecha */
+}
+
+/* Pausar al pasar el mouse (opcional, queda muy pro) */
+.marquee-row:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+

@@ -469,7 +469,7 @@ html {
 .dron-img {
   max-width: 180px; width: 35%; height: auto;
   position: absolute; z-index: 2;
-  left: 10%; top: 35%;
+  left: 05%; top: 35%;
   transform: translate(-50%, -50%);
 }
 

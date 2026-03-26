@@ -51,13 +51,13 @@ h1 {
 .Seccion1 {
   display: flex;
   flex-direction: row-reverse;
-  height: 65vh;
+  min-height: 80vh; /* Cambiamos height por min-height y subimos a 80 */
   width: 100%;
   background-color: #111111;
   color: white;
   position: relative;
   overflow: hidden;
-  contain: size layout; /* Le dice al navegador: "no cambies de tamaño pase lo que pase adentro" */
+  padding-top: 70px; 
 }
 
 .izquierda, .derecha {

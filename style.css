@@ -96,7 +96,7 @@ h1 {
   height: auto;
   position: absolute;
   z-index: 2;
-  left: 85%; /* En desktop a la derecha */
+  left: 90%; /* En desktop a la derecha */
   top: 35%;
   transform: translate(-50%, -50%);
   transition: transform 0.5s ease-out;
@@ -424,8 +424,15 @@ html {
   width: auto;
   text-align: center;
   white-space: nowrap;
-  border-right: 2px solid rgba(255,255,255,0.75); /* Cursor del typewriter */
+  border-right: none !important; 
+  border-left: none !important;
 }
+
+#profesion::after, #profesion::before {
+  content: none !important;
+  display: none !important;
+}
+
 
 @keyframes blink-caret {
   from, to { border-color: transparent }
@@ -477,79 +484,6 @@ html {
 
 
 
-
-
-
-@media (max-width: 768px) {
-
-  .dron-img {
-    width: 100px;
-    left: 75% !important;
-    top: 50% !important;
-  }
-
-
-  .Seccion1 {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 80vh !important; /* Altura fija para el Hero */
-    overflow: hidden;
-  }
-
-.izquierda, .derecha {
-    height: 50% !important;
-    flex: none !important;
-    width: 100% !important;
-  }
-  
-  .derecha h1, .derecha h2 {
-    margin-left: 0;
-    margin-right: 0;
-    width: 100%;
-  }
-
-  .derecha {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    padding: 0 !important;
-  }
-
-  #profesion {
-    font-size: 1.1rem;
-    letter-spacing: 3px;
-    margin: 10px auto 0 auto;
-  }
-
-
-  #perfil1 {
-    width: 200px;
-    /* En mobile lo centramos */
-    left: 50%;
-    top: 50%;
-  }
-
-  #avata {
-    width: 100px;
-    left: 75% !important; /* Centrado sobre la foto en mobile */
-    top: 50% !important;
-    /* Aquí activamos la animación de flotado */
-    animation: flotarMobile 3s ease-in-out infinite !important;
-  }
-
-  h1 { font-size: 2.5rem; }
-
-  /* REPARACIÓN SECCION 2 Y DETALLES */
-  #Seccion2 { flex-direction: column; height: auto; }
-  .item-servicio { width: 100%; height: 150px; }
-  .contenedor-detalle, .detalle-servicio.alt .contenedor-detalle {
-    flex-direction: column;
-    padding: 40px 20px;
-  }
-  .prev-btn { left: 10px; }
-  .next-btn { right: 10px; }
-} /* AQUÍ CIERRA EL MEDIA QUERY */
 
 /* LA ANIMACIÓN DEBE IR FUERA DEL MEDIA QUERY O BIEN IDENTADA */
 @keyframes flotarMobile {
@@ -608,8 +542,8 @@ html {
 /* --- SECCIÓN CONTACTO --- */
 .seccion-contacto {
   background-color: #111;
-  color: white;
-  padding: 100px 10% 40px 10%;
+  color: black;
+  padding: 10px 10% 40px 10%;
   text-align: center;
 }
 
@@ -667,7 +601,7 @@ html {
 
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 40px;
+  padding-top: 0px;
   font-size: 0.8rem;
   color: #444;
 }
@@ -678,14 +612,32 @@ html {
   padding-top: 70px; /* Compensa la altura del nav */
 }
 
-@media (max-width: 768px) {
-  .nav-links { display: none; } /* En mobile podrías usar un menú hamburguesa luego */
-  .contacto-wrapper h2 { font-size: 2rem; }
-  .redes-sociales { gap: 20px; }
+
+/* --- AJUSTE PARA MAIL Y TELÉFONO EN LÍNEA --- */
+.mailytelefono {
+  display: flex;             /* Los pone uno al lado del otro */
+  justify-content: center;    /* Los centra horizontalmente */
+  gap: 30px;                 /* Espacio entre el mail y el número */
+  flex-wrap: wrap;           /* Si la pantalla es muy chica, uno baja para no romperse */
+  margin-bottom: 40px;       /* Espacio respecto a las redes sociales */
+}
+
+.mailytelefono .mail-contacto {
+  margin-bottom: 0;          /* Quitamos el margen inferior para que alineen bien */
 }
 
 
 
+.mail-contacto {
+  text-decoration: none; /* Quita el subrayado */
+  color: #888;           /* Mantiene tu color gris */
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+.mail-contacto:hover {
+  color: white;          /* Se ilumina al pasar el mouse */
+}
 
 
 
@@ -700,6 +652,8 @@ html {
   text-align: center;
   color: white;
   margin-bottom: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .marquee-container {
@@ -768,3 +722,258 @@ html {
 }
 
 
+
+
+
+
+
+@media (max-width: 768px) {
+  /* 1. SECCIÓN HERO (ORDEN INVERTIDO) */
+  .Seccion1 {
+    display: flex !important;
+    flex-direction: column-reverse !important; 
+    height: auto !important; 
+    min-height: 40vh !important; /* Altura equilibrada */
+    padding-top: 50px !important; 
+    padding-bottom: 0 !important;
+    justify-content: center !important;
+    overflow: visible !important;
+  }
+
+  /* 2. TEXTO (NOMBRE ARRIBA) */
+  .derecha {
+    flex: none !important;
+    width: 100% !important;
+    text-align: center !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -150px;  /* Acerca la foto al nombre */
+  }
+
+  .derecha h1 { font-size: 2.5rem !important; margin: 0; }
+  
+
+  /* 3. FOTOS (ABAJO Y GRANDES) */
+  .izquierda {
+    flex: none !important;
+    width: 100% !important;
+    height: 420px !important; /* Espacio para que la foto sea grande */
+    position: relative !important;
+    margin-top: 0px;
+  }
+
+  #contenedor-perfil {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .perfil-img {
+    width: 95% !important; 
+    max-width: 400px !important;
+    height: auto !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 1;
+  }
+
+  /* 4. EL DRON (MOVIMIENTO CORREGIDO) */
+  #avata, .dron-img {
+      width: 140px !important;
+      height: auto !important;
+      position: absolute !important;
+      z-index: 10 !important;
+      left: 25% !important; 
+      top: 45% !important;
+      transform: translate(-50%, -50%) !important; /* Lo posicionamos y NO LO TOCAMOS MÁS */
+      
+      /* Nueva animación que no toca el transform */
+      animation: flotarConMargin 3s ease-in-out infinite !important;
+      
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+  /* 5. NAVEGACIÓN Y OTROS */
+  .nav-links { display: none; } /* Aquí iría tu hamburger */
+  
+  #Seccion2 { flex-direction: column; height: auto; }
+  .item-servicio { width: 100%; height: 180px; }
+  
+  .contenedor-detalle { flex-direction: column !important; padding: 40px 20px; }
+  .prev-btn { left: 10px !important; }
+  .next-btn { right: 10px !important; }
+
+  .mailytelefono {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0; /* Que empiece desde arriba de todo */
+    left: -100vw; /* Usamos vw (viewport width) para que sea el ancho total exacto */
+    width: 100vw; 
+    height: 100vh;
+    background: rgba(17, 17, 17, 0.98);
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center; /* Centra los links verticalmente */
+    align-items: center;     /* Centra los links horizontalmente */
+    transition: transform 0.4s ease-in-out, left 0.4s ease-in-out;
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* La clase que activa el JS */
+  .nav-links.active {
+    left: 0 !important;
+  }
+
+  /* Ajuste para que los links no hereden márgenes raros */
+  .nav-links li {
+    list-style: none;
+    margin: 20px 0;
+  }
+
+  .menu-toggle {
+    display: block !important;
+    z-index: 1000;
+  }
+
+
+    .bar {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px auto;
+      background-color: white;
+      transition: 0.3s;
+    }
+
+
+.celular-wrapper {
+    position: relative !important;
+    width: 240px !important; /* Un poquito más chico para que no desborde */
+    margin: 40px auto !important;
+    overflow: visible !important; /* PARA QUE SE VEAN LAS FLECHAS */
+    display: flex !important;
+  }
+
+  .video-slider {
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 9 / 19 !important; /* Proporción de celular moderno */
+    overflow: hidden !important; /* EL RECORTE ESTÁ ACÁ */
+    border-radius: 35px !important;
+    background: #000 !important;
+    left: 0 !important;
+    top: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    transform: scale(0.98) !important;
+  }
+
+  .video-item {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* Llena el espacio sin bordes */
+    display: none;
+  }
+
+  .video-item.active {
+    display: block !important;
+  }
+
+  /* --- 3. LAS FLECHAS (VISIBLES Y AFUERA) --- */
+  .prev-btn, .next-btn {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 100 !important;
+    display: flex !important; /* Aseguramos que se vean */
+    background: rgba(0, 0, 0, 0.5) !important; /* Fondo para que resalten */
+    color: white !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    border: 1px solid white !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .prev-btn { left: -55px !important; }
+  .next-btn { right: -55px !important; }
+
+  /* --- 4. CONTENEDOR DE DETALLE (EL FIX DEL DESBORDE) --- */
+  .contenedor-detalle {
+    flex-direction: column !important;
+    padding-left: 0 !important; /* Quitamos el padding que empujaba el video */
+    padding-right: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+
+  .titulo-galeria {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+
+
+}
+
+
+
+@keyframes flotarConMargin {
+  0%, 100% {
+    margin-top: 0px;
+  }
+  50% {
+    margin-top: -25px; /* Sube 25 píxeles */
+  }
+}
+
+
+.menu-toggle {
+  display: none;
+}
+
+
+
+/* --- CURSOR DEL TYPEWRITER --- */
+#profesion {
+  position: relative;
+}
+
+/* --- MANTENÉ ESTO PARA EL CURSOR DE JS --- */
+.cursor-typewriter {
+  display: inline-block;
+  font-weight: 100;
+  color: white;
+  margin-left: 2px;
+  animation: parpadeoCursor 0.8s infinite;
+}
+
+@keyframes parpadeoCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.span.cursor-typewriter {
+  display: none;
+  }

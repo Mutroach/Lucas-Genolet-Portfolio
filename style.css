@@ -728,6 +728,11 @@ html {
 
 
 @media (max-width: 768px) {
+
+#Seccion2 .media-video {
+    display: none !important;
+  }
+  
   /* 1. SECCIÓN HERO (ORDEN INVERTIDO) */
   .Seccion1 {
     display: flex !important;

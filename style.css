@@ -977,3 +977,18 @@ html {
 .span.cursor-typewriter {
   display: none;
   }
+
+
+
+
+
+
+/* Aplicamos el margen de scroll a todas las secciones que tengan un ID */
+section[id], 
+div[id],
+#Seccion2, 
+#detalle-servicio,
+.seccion-contacto {
+  /* Poné acá la misma altura que tiene tu nav (en tu caso 70px) */
+  scroll-margin-top: 70px; 
+}

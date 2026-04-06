@@ -270,7 +270,8 @@ html {
 
 .celular-wrapper {
   position: relative;
-  width: 100%;           /* Ocupa el ancho de su columna */
+  width: 100%; /* Ocupa el ancho de su columna */
+  height: 80%;
   max-width: 300px;      /* Pero no más de 300px (tamaño real de un celu) */
   aspect-ratio: 9 / 19;  /* Mantiene la proporción de un smartphone moderno */
   margin: 0 auto;        /* Lo centra en la columna */

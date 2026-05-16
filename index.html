@@ -455,16 +455,32 @@ iniciarCiclo();
   document.addEventListener('DOMContentLoaded', resetDronParaMobile);
 
 
-  // --- 5. SECCIÓN 2: HOVER VIDEOS Y SCROLL SUAVE ---
+// --- 5. SECCIÓN 2: HOVER VIDEOS Y SCROLL SUAVE (FIXED FOR MOBILE) ---
   document.querySelectorAll('.item-servicio').forEach(item => {
     const video = item.querySelector('.media-video');
-    item.addEventListener('mouseenter', () => { if(video) video.play(); });
-    item.addEventListener('mouseleave', () => { if(video) { video.pause(); video.currentTime = 0; } });
-    item.addEventListener('touchstart', () => { if(video) video.play(); });
-    item.addEventListener('click', () => {
+    
+    // HOVER (ESCRITORIO): Solo se activa si la pantalla es mayor a 768px
+    item.addEventListener('mouseenter', () => { 
+      if (window.innerWidth > 768 && video) {
+        video.play().catch(err => console.log("Video bloqueado o cargando"));
+      } 
+    });
+    
+    item.addEventListener('mouseleave', () => { 
+      if (window.innerWidth > 768 && video) { 
+        video.pause(); 
+        video.currentTime = 0; 
+      } 
+    });
+    
+    // CLICK / TAP: Te lleva a la sección sin tocar el video bajo ninguna circunstancia
+    item.addEventListener('click', (e) => {
       const targetId = item.getAttribute('data-target');
       const targetSection = document.getElementById(targetId);
-      if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
 

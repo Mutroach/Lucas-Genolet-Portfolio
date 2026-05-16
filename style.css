@@ -732,6 +732,7 @@ html {
 
 #Seccion2 .media-video {
     display: none !important;
+    pointer-events: none !important;
   }
   
   /* 1. SECCIÓN HERO (ORDEN INVERTIDO) */
